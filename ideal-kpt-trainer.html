@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>28 дней осознанности — тренажёр реакции</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d1112;--panel:#161c1d;--line:#2a3333;--tx:#f3efe6;--mut:#9aa39f;--gold:#d9a44a;--gold2:#f0c878;--ok:#8fbf8a;--on:#0d1112;color-scheme:dark}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f6f2ea;--panel:#fffdf8;--line:#ddd5c4;--tx:#1b2021;--mut:#5f6864;--gold:#9a6a12;--gold2:#7d5509;--ok:#3f7a3a;--on:#fffdf8;color-scheme:light}}
+:root[data-theme="light"]{--bg:#f6f2ea;--panel:#fffdf8;--line:#ddd5c4;--tx:#1b2021;--mut:#5f6864;--gold:#9a6a12;--gold2:#7d5509;--ok:#3f7a3a;--on:#fffdf8;color-scheme:light}
+:root[data-theme="dark"]{--bg:#0d1112;--panel:#161c1d;--line:#2a3333;--tx:#f3efe6;--mut:#9aa39f;--gold:#d9a44a;--gold2:#f0c878;--ok:#8fbf8a;--on:#0d1112;color-scheme:dark}
+*{box-sizing:border-box;margin:0}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--tx);font:400 16px/1.55 Montserrat,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;min-height:100vh}
+main{max-width:640px;margin:0 auto;padding:20px 18px 80px}
+h1{font-weight:800;font-size:clamp(30px,9vw,44px);line-height:1.05;letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--gold)}
+h2{font-weight:700;font-size:22px;line-height:1.2;margin:4px 0 6px}
+p.lead{color:var(--mut);margin-top:10px}
+.chain{display:flex;align-items:center;gap:0;margin:22px 0 6px;overflow-x:auto}
+.chain span{font-size:13px;font-weight:500;padding:8px 12px;border:1px solid var(--gold);border-radius:99px;white-space:nowrap}
+.chain i{flex:1 0 12px;height:1px;background:var(--gold);min-width:12px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);display:flex;gap:4px;overflow-x:auto;padding:10px 18px;margin:18px -18px 22px}
+nav button{flex:0 0 auto;background:none;border:0;color:var(--mut);font:500 14px Montserrat,system-ui,sans-serif;padding:8px 12px;border-radius:8px;cursor:pointer}
+nav button[aria-selected="true"]{color:var(--on);background:var(--gold);font-weight:700}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--gold2);outline-offset:2px}
+section[hidden]{display:none}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0}
+.card b{color:var(--gold)}
+.row{display:grid;grid-template-columns:1fr 24px 1fr;gap:6px;align-items:center;margin:8px 0}
+.row div{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px}
+.row div+div{border-color:var(--gold)}
+.row .ar{background:none;border:0;padding:0;text-align:center;color:var(--gold)}
+.row .ar+div,.row div:last-child{border-color:var(--gold)}
+label{display:block;font-weight:500;font-size:14px;margin:16px 0 2px}
+label small{display:block;color:var(--mut);font-weight:400;font-size:13px}
+textarea{width:100%;min-height:64px;background:var(--panel);color:var(--tx);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:400 15px/1.45 Montserrat,system-ui,sans-serif;resize:vertical}
+.btn{display:inline-block;background:var(--gold);color:var(--on);border:0;border-radius:10px;font:700 15px Montserrat,system-ui,sans-serif;padding:13px 20px;margin-top:20px;cursor:pointer}
+.btn.ghost{background:none;color:var(--gold);border:1px solid var(--gold);margin-left:8px}
+.stat{display:flex;gap:22px;margin:14px 0}
+.stat div{font-size:13px;color:var(--mut)}
+.stat strong{display:block;font-size:28px;color:var(--gold);font-weight:800;line-height:1.1}
+.log{border-left:2px solid var(--gold);padding:2px 0 2px 14px;margin:14px 0;font-size:14px}
+.log time{color:var(--mut);font-size:12px}
+.note{color:var(--ok);font-size:14px;min-height:20px;margin-top:10px}
+.goal{border-left:3px solid var(--gold);padding-left:14px;margin:20px 0;font-weight:500}
+.tip{color:var(--mut);font-size:13px;margin-top:26px}
+details.exd{background:var(--panel);border:1px solid var(--line);border-radius:12px;margin:10px 0;padding:0 14px}
+details.exd summary{cursor:pointer;font-weight:700;padding:14px 0;list-style:none;display:flex;justify-content:space-between;gap:10px;font-size:15px}
+details.exd summary::-webkit-details-marker{display:none}
+details.exd summary span{color:var(--mut);font-weight:400;font-size:13px;white-space:nowrap}
+details.exd[open] summary{color:var(--gold)}
+.exd ol{padding-left:20px;color:var(--mut);font-size:14px;margin:0 0 8px}
+.exd ol li{margin:4px 0}
+.exd textarea{margin:6px 0 10px}
+.exd label.ck{display:flex;gap:10px;align-items:center;margin:0 0 14px;font-weight:500}
+.exd label.ck input{width:20px;height:20px;accent-color:var(--gold)}
+.exg{color:var(--gold);font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin:26px 0 4px}
+.warn{font-size:13px;color:var(--mut);border-left:3px solid var(--gold);padding-left:12px;margin:10px 0}
+</style>
+</head>
+<body>
+<main>
+<h1>28 дней <em>осознанности</em></h1>
+<p class="lead">Тренажёр реакции: практическая система саморегуляции. Не каждая мысль требует реакции — но то, что ты делаешь после неё, можно тренировать.</p>
+<div class="chain" aria-label="Цепочка"><span>Мысль</span><i></i><span>Решение</span><i></i><span>Действие</span><i></i><span>Результат</span></div>
+
+<nav role="tablist">
+<button role="tab" aria-selected="true" data-t="chain">Цепочка</button>
+<button role="tab" aria-selected="false" data-t="diary">5 минут в день</button>
+<button role="tab" aria-selected="false" data-t="ex">Упражнения</button>
+<button role="tab" aria-selected="false" data-t="tpl">Шаблон</button>
+<button role="tab" aria-selected="false" data-t="exp">Эксперимент</button>
+</nav>
+
+<section id="chain">
+<h2>Как возникает результат</h2>
+<p class="lead">Сначала увидь цепочку, потом найди триггер, проверь мысль и выбери действие.</p>
+<div class="card"><b>Пример.</b> «Мне не ответили» → «Я не нужен» → накручиваю себя → пишу снова и снова → тревога усиливается.</div>
+<h2 style="margin-top:26px">Триггер — это пять вопросов</h2>
+<div class="card">Ситуация: что произошло?<br>Мысль: что промелькнуло первым?<br>Эмоция: что я почувствовал?<br>Тело: что произошло физически?<br>Действие: что захотелось сделать?</div>
+<h2 style="margin-top:26px">Проверь негативную мысль</h2>
+<div class="card">1. Насколько реально, что это произойдёт?<br>2. Если произойдёт — как я подготовлюсь?<br>3. Какой результат будет удовлетворительным?<br>4. Какой результат будет лучшим из реалистичных?</div>
+<h2 style="margin-top:26px">Критик — в задачу</h2>
+<div class="row"><div>«Я провалился»</div><div class="ar">→</div><div>«Что я могу улучшить?»</div></div>
+<div class="row"><div>«Я неудачник»</div><div class="ar">→</div><div>«Каких качеств мне сейчас не хватает?»</div></div>
+<div class="row"><div>«Я слабый»</div><div class="ar">→</div><div>«В чём я хочу стать сильнее?»</div></div>
+<div class="row"><div>«У меня ничего не получается»</div><div class="ar">→</div><div>«Что конкретно не получилось и что изменить?»</div></div>
+<h2 style="margin-top:26px">Аффирмации о направлении</h2>
+<div class="row"><div>«Я идеален»</div><div class="ar">→</div><div>«Я развиваю свои сильные стороны»</div></div>
+<div class="row"><div>«Я никогда не ошибаюсь»</div><div class="ar">→</div><div>«Я учусь замечать ошибки и исправлять их»</div></div>
+<div class="row"><div>«Я ничего не боюсь»</div><div class="ar">→</div><div>«Я учусь действовать, даже когда сомневаюсь»</div></div>
+<p class="goal">Цель — не никогда не тревожиться и не ошибаться, а замечать реакцию, выдерживать эмоцию, проверять мысль и выбирать поведение.</p>
+</section>
+
+<section id="diary" hidden>
+<h2>Тренировка на 5 минут</h2>
+<p class="lead">Каждый день — маленький эксперимент над своим поведением.</p>
+<div class="stat"><div><strong id="s-days">0</strong>дней подряд</div><div><strong id="s-all">0</strong>записей всего</div></div>
+<form id="f-diary" onsubmit="return false">
+<label>Одна ситуация, которая меня зацепила<textarea name="a" required></textarea></label>
+<label>Одна автоматическая мысль<textarea name="b" required></textarea></label>
+<label>Один триггер и одна эмоция<textarea name="c" required></textarea></label>
+<label>Одна мысль, которую я проверил<small>Возможно ли? Неизбежно ли? Что сделаю, если случится?</small><textarea name="d"></textarea></label>
+<label>Одно новое действие вместо привычной реакции<textarea name="e" required></textarea></label>
+<button class="btn" id="save-d" type="button">Сохранить запись</button>
+<div class="note" id="n-d" role="status"></div>
+</form>
+<div id="log"></div>
+</section>
+
+<section id="ex" hidden>
+<h2>Упражнения</h2>
+<p class="lead">Короткие практики по четырём темам. Открой упражнение, выполни шаги, запиши заметку и отметь выполненным.</p>
+<div class="stat"><div><strong id="ex-done">0</strong>выполнено из 12</div></div>
+<div id="ex-list"></div>
+</section>
+
+<section id="tpl" hidden>
+<h2>Главный шаблон саморегуляции</h2>
+<p class="lead">Открой его в момент, когда старая реакция уже готова включиться.</p>
+<form id="f-tpl" onsubmit="return false"></form>
+<button class="btn" id="copy" type="button">Скопировать заполненный шаблон</button><button class="btn ghost" id="clr" type="button">Очистить</button>
+<div class="note" id="n-t" role="status"></div>
+</section>
+
+<section id="exp" hidden>
+<h2>Твой первый эксперимент</h2>
+<p class="lead">Не жди идеального момента. Выбери одну повторяющуюся реакцию.</p>
+<form id="f-exp" onsubmit="return false">
+<label>Мой триггер<small>Что чаще всего запускает нежелательное поведение?</small><textarea name="t"></textarea></label>
+<label>Моя старая реакция<small>Что я обычно думаю, чувствую и делаю?</small><textarea name="o"></textarea></label>
+<label>Мой новый шаг<small>Что я попробую сделать иначе уже сегодня?</small><textarea name="n"></textarea></label>
+</form>
+<p class="goal">Цель на сегодня: не стать другим человеком. Сделать один другой выбор.</p>
+<div class="card">Заметил → остановился → проверил → переосмыслил → выбрал → сделал → проанализировал → повторил.</div>
+<p class="note" id="n-e" role="status"></p>
+<p class="tip">Мысль — не приказ. Эмоция — не решение. Триггер — не приговор. У тебя есть следующий шаг.</p>
+</section>
+<p class="tip">Образовательный материал для самонаблюдения. Не заменяет консультацию психолога или врача.</p>
+</main>
+<script>
+(function(){
+var $=function(s){return document.querySelector(s)};
+var mem={};
+function rd(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return mem[k]!==undefined?mem[k]:d}}
+function wr(k,v){mem[k]=v;try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+var tabs=document.querySelectorAll('nav button');
+tabs.forEach(function(b){b.addEventListener('click',function(){
+tabs.forEach(function(x){x.setAttribute('aria-selected',x===b)});
+['chain','diary','ex','tpl','exp'].forEach(function(id){$('#'+id).hidden=id!==b.dataset.t});
+window.scrollTo({top:0})})});
+
+function day(d){return d.toISOString().slice(0,10)}
+function render(){
+var L=rd('kpt:diary',[]);
+$('#s-all').textContent=L.length;
+var set={};L.forEach(function(e){set[e.d]=1});
+var n=0,c=new Date();if(!set[day(c)])c.setDate(c.getDate()-1);
+while(set[day(c)]){n++;c.setDate(c.getDate()-1)}
+$('#s-days').textContent=n;
+$('#log').innerHTML=L.slice().reverse().slice(0,10).map(function(e){
+return '<div class="log"><time>'+esc(e.d)+'</time><br><b>Ситуация:</b> '+esc(e.a)+'<br><b>Мысль:</b> '+esc(e.b)+'<br><b>Триггер и эмоция:</b> '+esc(e.c)+(e.d2?'<br><b>Проверка:</b> '+esc(e.d2):'')+'<br><b>Новое действие:</b> '+esc(e.e)+'</div>'}).join('')}
+$('#save-d').addEventListener('click',function(){
+var f=$('#f-diary');if(!f.reportValidity())return;
+var L=rd('kpt:diary',[]);
+L.push({d:day(new Date()),a:f.a.value.trim(),b:f.b.value.trim(),c:f.c.value.trim(),d2:f.d.value.trim(),e:f.e.value.trim()});
+wr('kpt:diary',L);f.reset();render();
+$('#n-d').textContent='Запись сохранена. Один маленький эксперимент сделан.'});
+render();
+
+var steps=[['Ситуация','Что произошло?'],['Мысль','Что промелькнуло первым?'],['Триггер','Что запустило реакцию?'],['Эмоция','Что я почувствовал и где это в теле?'],['Проверка мысли','Насколько реально? Неизбежно ли?'],['Альтернативы','Какие ещё варианты действий есть?'],['Решение','Что я выбираю?'],['Действие','Что я делаю прямо сейчас?'],['Результат','К чему это привело?'],['Вывод','Что я заберу в следующий раз?']];
+var T=rd('kpt:tpl',{});
+$('#f-tpl').innerHTML=steps.map(function(s,i){return '<label>'+(i+1)+'. '+s[0]+'<small>'+s[1]+'</small><textarea data-i="'+i+'">'+esc(T[i]||'')+'</textarea></label>'}).join('');
+$('#f-tpl').addEventListener('input',function(e){if(e.target.dataset.i!==undefined){T[e.target.dataset.i]=e.target.value;wr('kpt:tpl',T)}});
+$('#copy').addEventListener('click',function(){
+var t=steps.map(function(s,i){return (i+1)+'. '+s[0]+': '+(T[i]||'—')}).join('\n');
+function ok(){$('#n-t').textContent='Скопировано.'}
+function fb(){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');ok()}catch(e){$('#n-t').textContent='Не удалось скопировать — выдели текст вручную.'}a.remove()}
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,fb)}else fb()});
+$('#clr').addEventListener('click',function(){T={};wr('kpt:tpl',T);document.querySelectorAll('#f-tpl textarea').forEach(function(x){x.value=''});$('#n-t').textContent='Шаблон очищен.'});
+
+var E=rd('kpt:exp',{});var fe=$('#f-exp');
+['t','o','n'].forEach(function(k){fe[k].value=E[k]||''});
+fe.addEventListener('input',function(e){E[e.target.name]=e.target.value;wr('kpt:exp',E);$('#n-e').textContent='Сохранено на этом устройстве.'});
+
+var EX=[
+['Отношения',[
+['Пауза перед сообщением','3 мин',['Остановись перед тем, как написать или ответить.','Запиши мысль («мне не ответили → я не нужен»).','Назови два других объяснения (человек занят, не увидел сообщение).','Выбери одно действие: подождать или написать один раз.']],
+['Карта триггеров в общении','5 мин',['Вспомни три ситуации, где реакция была сильнее, чем хотелось.','Для каждой ответь: что произошло, какая первая мысль, какая эмоция, что в теле, что захотелось сделать.']],
+['Один другой шаг','5 мин',['Выбери привычную реакцию в отношениях (замолчать, накручивать себя, писать снова и снова).','Придумай новый шаг на сегодня и выполни его.','Вечером запиши результат: что изменилось.']]]],
+['Самооценка',[
+['Критик в задачу','5 мин',['Запиши четыре фразы-приговора («я провалился», «я неудачник», «я слабый», «у меня ничего не получается»).','Для каждой напиши вопрос-задачу: что я могу улучшить? Каких качеств мне не хватает? В чём я хочу стать сильнее? Что конкретно не получилось и что изменить?']],
+['Аффирмация о направлении','3 мин',['Выбери фразу не о совершенстве, а о развитии: «я учусь замечать ошибки и исправлять их».','Прочитай её утром.','В течение дня сделай одно действие в этом направлении.']],
+['Что получилось','5 мин',['Вечером запиши одно действие, которое ты сделал, даже когда сомневался.','Что получилось?','Что хочешь улучшить завтра?']]]],
+['Достижение целей',[
+['Понять, решить, сделать, повторить','5 мин',['Выбери цель.','Запиши: что я понимаю о проблеме, что решаю изменить.','Один шаг, который сделаю сегодня.','Когда я его повторю.']],
+['5 минут в день','5 мин',['Одна ситуация, которая зацепила.','Одна автоматическая мысль.','Один триггер и одна эмоция.','Одна мысль, которую проверил.','Одно новое действие вместо привычной реакции.']],
+['Первый эксперимент','5 мин',['Запиши свой триггер, старую реакцию и новый шаг.','Сделай этот шаг сегодня.','Цель дня — не стать другим человеком, а сделать один другой выбор.']]]],
+['Тревога и мозг',[
+['Четыре вопроса к тревоге','5 мин',['Возьми тревожную мысль.','Насколько реально, что это произойдёт?','Если произойдёт, как я подготовлюсь?','Какой результат будет удовлетворительным?','Какой будет лучшим из реалистичных?']],
+['Тревога в план','5 мин',['Запиши тревожную мысль («я точно провалю собеседование»).','Проверь: возможно ли? Неизбежно ли? Что сделаю, если случится?','Выбери один конкретный шаг, например подготовить 10 вероятных вопросов.']],
+['Сигналы тела','3 мин',['Заметь, где в теле ты чувствуешь тревогу.','Назови эмоцию одним словом и оцени силу от 0 до 10.','Вернись к вопросу: что я решаю делать дальше?']]]]
+];
+var XS=rd('kpt:ex',{});
+function exRender(){
+var h='',n=0,i=0;
+EX.forEach(function(g){
+h+='<div class="exg">'+esc(g[0])+'</div>';
+g[1].forEach(function(e){
+var id='e'+(i++),st=XS[id]||{};if(st.done)n++;
+h+='<details class="exd"><summary>'+(st.done?'✓ ':'')+esc(e[0])+'<span>'+esc(e[1])+'</span></summary><ol>'+e[2].map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ol><textarea data-x="'+id+'" placeholder="Заметка (по желанию)">'+esc(st.note||'')+'</textarea><label class="ck"><input type="checkbox" data-c="'+id+'"'+(st.done?' checked':'')+'>Выполнено</label></details>'});
+if(g[0]==='Тревога и мозг')h+='<p class="warn">Если тревога сильная, мешает жить или появляются мысли о причинении себе вреда, обратись к специалисту или в экстренную службу. Упражнения не заменяют помощь психолога или врача.</p>'});
+$('#ex-list').innerHTML=h;$('#ex-done').textContent=n}
+var open={};
+$('#ex-list').addEventListener('toggle',function(e){},true);
+$('#ex-list').addEventListener('input',function(e){var id=e.target.dataset.x;if(id){XS[id]=XS[id]||{};XS[id].note=e.target.value;wr('kpt:ex',XS)}});
+$('#ex-list').addEventListener('change',function(e){var id=e.target.dataset.c;if(id){XS[id]=XS[id]||{};XS[id].done=e.target.checked;wr('kpt:ex',XS);
+var ds=document.querySelectorAll('#ex-list details'),o=[];ds.forEach(function(d){o.push(d.open)});exRender();document.querySelectorAll('#ex-list details').forEach(function(d,k){d.open=o[k]})}});
+exRender();
+})();
+</script>
+</body>
+</html>
